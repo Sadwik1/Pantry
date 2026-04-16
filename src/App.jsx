@@ -6,12 +6,23 @@ import ProductList from './components/ProductList';
 import Recipes from './components/Recipes';
 
 export default function App() {
-    const [products, setProducts] = useState([
-        { id: 1, name: 'Chicken Breast', expiryDate: '2024-05-20' },
-        { id: 2, name: 'Eggs', expiryDate: '2025-12-10' },
-    ]);
+    const [products, setProducts] = useState(() => {
+        const savedProducts = localStorage.getItem('pantryProducts');
+        if (savedProducts) {
+            try {
+                return JSON.parse(savedProducts);
+            } catch (e) {
+                console.error("B³¹d podczas odczytu localStorage", e);
+            }
+        }
+        return [];
+    });
     
     const [validIngredients, setValidIngredients] = useState([]);
+
+    useEffect(() => {
+        localStorage.setItem('pantryProducts', JSON.stringify(products));
+    }, [products]);
 
     useEffect(() => {
         fetch('https://www.themealdb.com/api/json/v1/1/list.php?i=list')

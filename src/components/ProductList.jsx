@@ -6,7 +6,7 @@ const getExpiryStatus = (expiryDate) => {
 };
 
 export default function ProductList({ products, onDelete }) {
-    if (!products.length) return <p className="empty-pantry-text">Pantry is empty.</p>;
+    if (!products.length) return <p className="empty-pantry-text">You can see your future products here.</p>;
 
     return (
         <div className="pantry-scroll-container">

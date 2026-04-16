@@ -124,7 +124,6 @@ export default function Recipes({ products, validIngredients = [] }) {
 
     useEffect(() => {
         fetchRecipes();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const getIngredientsWithStatus = (meal) => {
@@ -243,7 +242,6 @@ export default function Recipes({ products, validIngredients = [] }) {
                 })}
             </div>
 
-            {/* Paginacja */}
             {!loading && totalPages > 1 && (
                 <div className="pagination-container">
                     <button 
