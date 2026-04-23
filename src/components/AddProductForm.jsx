@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import styles from './AddProductForm.module.css';
 
 const getLevenshteinDistance = (a, b) => {
     const matrix = [];
@@ -74,25 +75,25 @@ export default function AddProductForm({ onAdd, validIngredients }) {
     };
 
     return (
-        <div className="form-card relative-form">
-            <form onSubmit={handleSubmit} className="form-inline">
-                <div className="form-group">
+        <div className={styles.formCard}>
+            <form onSubmit={handleSubmit} className={styles.formInline}>
+                <div className={styles.formGroup}>
                     <label>Product Name</label>
                     <input type="text" placeholder="e.g. Eggs" value={name} onChange={(e) => setName(e.target.value)} required />
                 </div>
-                <div className="form-group">
+                <div className={styles.formGroup}>
                     <label>Expiry Date</label>
                     <input type="date" value={expiryDate} onChange={(e) => setExpiryDate(e.target.value)} required />
                 </div>
-                <button type="submit" className="btn-add-inline">Add Item</button>
+                <button type="submit" className={styles.btnAddInline}>Add Item</button>
             </form>
             
             {error && (
-                <div className="form-error">
+                <div className={styles.formError}>
                     {error}
                     {suggestion && (
-                        <div className="suggestion-box">
-                            Did you mean: <button type="button" className="btn-suggestion" onClick={applySuggestion}>{suggestion}</button>?
+                        <div className={styles.suggestionBox}>
+                            Did you mean: <button type="button" className={styles.btnSuggestion} onClick={applySuggestion}>{suggestion}</button>?
                         </div>
                     )}
                 </div>

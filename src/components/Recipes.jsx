@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import styles from './Recipes.module.css';
 
 const getLevenshteinDistance = (a, b) => {
     const matrix = [];
@@ -96,29 +97,29 @@ export default function Recipes({ products, validIngredients = [], onAddToShoppi
     return (
         <div>
             <h2>Recipe Finder</h2>
-            <div className="recipe-toolbar">
-                <div className="recipe-search-wrapper">
-                    <div className="recipe-search-box">
+            <div className={styles.recipeToolbar}>
+                <div className={styles.recipeSearchWrapper}>
+                    <div className={styles.recipeSearchBox}>
                         <input
                             type="text"
                             placeholder="Search by main ingredient..."
                             value={ingredientQuery}
                             onChange={e => setIngredientQuery(e.target.value)}
                             onKeyDown={e => e.key === 'Enter' && handleSearchClick()}
-                            className="recipe-search-input"
+                            className={styles.recipeSearchInput}
                         />
-                        <button className="btn-add-inline" onClick={handleSearchClick}>Search</button>
+                        <button className={styles.btnAddInline} onClick={handleSearchClick}>Search</button>
                     </div>
                 </div>
-                <div className="recipe-limit">
-                    <label className="limit-label">Limit:</label>
-                    <select value={limit} onChange={(e) => { setLimit(e.target.value === 'unlimited' ? 'unlimited' : Number(e.target.value)); setCurrentPage(1); }} className="limit-select">
+                <div className={styles.recipeLimit}>
+                    <label className={styles.limitLabel}>Limit:</label>
+                    <select value={limit} onChange={(e) => { setLimit(e.target.value === 'unlimited' ? 'unlimited' : Number(e.target.value)); setCurrentPage(1); }} className={styles.limitSelect}>
                         <option value={6}>6</option>
                         <option value={9}>9</option>
                         <option value="unlimited">Unlimited</option>
                     </select>
                 </div>
-                <label className="checkbox-label">
+                <label className={styles.checkboxLabel}>
                     <span>Missing ingredients</span>
                     <input type="checkbox" checked={allowMissing} onChange={(e) => { setAllowMissing(e.target.checked); setCurrentPage(1); }} />
                 </label>
@@ -126,12 +127,12 @@ export default function Recipes({ products, validIngredients = [], onAddToShoppi
 
             {loading && <p>Searching...</p>}
 
-            <div className="recipe-grid">
+            <div className={styles.recipeGrid}>
                 {paginatedMeals.map(m => (
-                    <div key={m.idMeal} className="form-card recipe-card" onClick={() => setSelectedMeal(m)}>
-                        <img src={m.strMealThumb} alt={m.strMeal} className="recipe-card-img" />
-                        <p className="recipe-card-title">{m.strMeal}</p>
-                        <p className={getMissingCount(m) === 0 ? "recipe-status-ok" : "recipe-status-missing"}>
+                    <div key={m.idMeal} className={`${styles.formCard} ${styles.recipeCard}`} onClick={() => setSelectedMeal(m)}>
+                        <img src={m.strMealThumb} alt={m.strMeal} className={styles.recipeCardImg} />
+                        <p className={styles.recipeCardTitle}>{m.strMeal}</p>
+                        <p className={getMissingCount(m) === 0 ? styles.recipeStatusOk : styles.recipeStatusMissing}>
                             {getMissingCount(m) === 0 ? 'Ready to cook!' : `Missing: ${getMissingCount(m)}`}
                         </p>
                     </div>
@@ -139,21 +140,21 @@ export default function Recipes({ products, validIngredients = [], onAddToShoppi
             </div>
 
             {selectedMeal && (
-                <div className="modal-overlay">
-                    <div className="modal-content">
-                        <button className="modal-close" onClick={() => setSelectedMeal(null)}>&times;</button>
-                        <h2 className="modal-title">{selectedMeal.strMeal}</h2>
-                        <div className="modal-grid">
+                <div className={styles.modalOverlay}>
+                    <div className={styles.modalContent}>
+                        <button className={styles.modalClose} onClick={() => setSelectedMeal(null)}>&times;</button>
+                        <h2 className={styles.modalTitle}>{selectedMeal.strMeal}</h2>
+                        <div className={styles.modalGrid}>
                             <div>
-                                <img src={selectedMeal.strMealThumb} alt={selectedMeal.strMeal} className="modal-img" />
-                                <h4 className="modal-subtitle">Ingredients:</h4>
-                                <ul className="modal-ing-list">
+                                <img src={selectedMeal.strMealThumb} alt={selectedMeal.strMeal} className={styles.modalImg} />
+                                <h4 className={styles.modalSubtitle}>Ingredients:</h4>
+                                <ul className={styles.modalIngList}>
                                     {getIngredientsWithStatus(selectedMeal).map((ing, idx) => (
-                                        <li key={idx} className={`modal-ing-item ${ing.isMissing ? 'ing-missing' : 'ing-ok'}`}>
-                                            {ing.name} - {ing.measure}
+                                        <li key={idx} className={`${styles.modalIngItem} ${ing.isMissing ? styles.ingMissing : styles.ingOk}`}>
+                                            <span>{ing.name} - {ing.measure}</span>
                                             {ing.isMissing && (
                                                 <button
-                                                    className="btn-add-to-shop"
+                                                    className="btn-add-to-shop" /* Ta klasa mo¿e nadal pochodziæ ze starego modu³u przycisku koszyka, np. ShoppingList, jeœli wspó³dzielisz ten przycisk globalnie lub w Recipe, ale warto go utrzymaæ wed³ug w³asnego uznania - ja zachowa³em string aby siê zgadza³o */
                                                     onClick={(e) => {
                                                         e.stopPropagation();
                                                         onAddToShopping(ing.name);
@@ -166,8 +167,8 @@ export default function Recipes({ products, validIngredients = [], onAddToShoppi
                                 </ul>
                             </div>
                             <div>
-                                <h4 className="modal-subtitle">Instructions:</h4>
-                                <p className="modal-instructions">{selectedMeal.strInstructions}</p>
+                                <h4 className={styles.modalSubtitle}>Instructions:</h4>
+                                <p className={styles.modalInstructions}>{selectedMeal.strInstructions}</p>
                             </div>
                         </div>
                     </div>

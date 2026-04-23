@@ -1,0 +1,76 @@
+.emptyPantryText {
+    color: #888;
+    font-size: 0.9rem;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.pantryScrollContainer {
+    max-height: 45vh;
+    overflow-y: auto;
+    padding-right: 8px;
+    border: 1px solid #222;
+    border-radius: 8px;
+    background: #161616;
+}
+
+.pantryScrollContainer::-webkit-scrollbar {
+    width: 6px;
+}
+
+.pantryScrollContainer::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 10px;
+}
+
+.productsContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.productCard {
+    background: transparent;
+    padding: 0.4rem 0.6rem;
+    display: grid;
+    grid-template-columns: 3fr 1fr 1.5fr auto;
+    align-items: center;
+    border-bottom: 1px solid #222;
+    font-size: 0.85rem;
+}
+
+.productCard:last-child {
+    border-bottom: none;
+}
+
+.productCard:hover {
+    background-color: #1e1e1e;
+}
+
+.productName {
+    font-weight: 500;
+}
+
+.productQuantity {
+    font-weight: 500;
+}
+
+.productQty {
+    color: #777;
+}
+
+.productExpiry {
+    font-weight: normal;
+}
+
+.btnDeleteSmall {
+    background: transparent;
+    color: #cf6679;
+    border: none;
+    cursor: pointer;
+    font-size: 0.7rem;
+    padding: 4px;
+}
+
+.btnDeleteSmall:hover {
+    text-decoration: underline;
+}
