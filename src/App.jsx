@@ -4,6 +4,7 @@ import './styles.css';
 import AddProductForm from './components/AddProductForm';
 import ProductList from './components/ProductList';
 import Recipes from './components/Recipes';
+import ShoppingList from './components/ShoppingList';
 
 export default function App() {
     const [products, setProducts] = useState(() => {
@@ -12,17 +13,26 @@ export default function App() {
             try {
                 return JSON.parse(savedProducts);
             } catch (e) {
-                console.error("B³¹d podczas odczytu localStorage", e);
+                console.error("B³¹d odczytu localStorage", e);
             }
         }
         return [];
     });
-    
+
+    const [shoppingItems, setShoppingItems] = useState(() => {
+        const saved = localStorage.getItem('shoppingList');
+        return saved ? JSON.parse(saved) : [];
+    });
+
     const [validIngredients, setValidIngredients] = useState([]);
 
     useEffect(() => {
         localStorage.setItem('pantryProducts', JSON.stringify(products));
     }, [products]);
+
+    useEffect(() => {
+        localStorage.setItem('shoppingList', JSON.stringify(shoppingItems));
+    }, [shoppingItems]);
 
     useEffect(() => {
         fetch('https://www.themealdb.com/api/json/v1/1/list.php?i=list')
@@ -43,6 +53,11 @@ export default function App() {
         setProducts(products.filter((p) => p.id !== id));
     };
 
+    const addToShoppingList = (name) => {
+        const newItem = { id: Date.now(), name, bought: false };
+        setShoppingItems(prev => [newItem, ...prev]);
+    };
+
     return (
         <Router>
             <div className="app-container">
@@ -53,6 +68,7 @@ export default function App() {
                     <nav className="nav-menu">
                         <NavLink to="/">Inventory</NavLink>
                         <NavLink to="/recipes">Recipes</NavLink>
+                        <NavLink to="/shopping-list">Shopping List</NavLink>
                     </nav>
                     <div className="header-right"></div>
                 </header>
@@ -69,7 +85,20 @@ export default function App() {
                                 </section>
                             </div>
                         } />
-                        <Route path="/recipes" element={<Recipes products={products} validIngredients={validIngredients} />} />
+                        <Route path="/recipes" element={
+                            <Recipes
+                                products={products}
+                                validIngredients={validIngredients}
+                                onAddToShopping={addToShoppingList}
+                            />
+                        } />
+                        <Route path="/shopping-list" element={
+                            <ShoppingList
+                                items={shoppingItems}
+                                setItems={setShoppingItems}
+                                addToPantry={handleAddProduct}
+                            />
+                        } />
                     </Routes>
                 </main>
             </div>
