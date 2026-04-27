@@ -23,7 +23,7 @@ export default function Recipes({ products, validIngredients = [], onAddToShoppi
     const [ingredientQuery, setIngredientQuery] = useState('');
     const [selectedMeal, setSelectedMeal] = useState(null);
     const [allowMissing, setAllowMissing] = useState(true);
-    const [limit, setLimit] = useState(9);
+    const [limit, setLimit] = useState(6);
     const [currentPage, setCurrentPage] = useState(1);
     const [error, setError] = useState('');
     const [suggestion, setSuggestion] = useState('');
@@ -111,7 +111,8 @@ export default function Recipes({ products, validIngredients = [], onAddToShoppi
                         <button className={styles.btnAddInline} onClick={handleSearchClick}>Search</button>
                     </div>
                 </div>
-                <div className={styles.recipeLimit}>
+                <div className = {styles.recipeRest}>
+                    <div className={styles.recipeLimit}>
                     <label className={styles.limitLabel}>Limit:</label>
                     <select value={limit} onChange={(e) => { setLimit(e.target.value === 'unlimited' ? 'unlimited' : Number(e.target.value)); setCurrentPage(1); }} className={styles.limitSelect}>
                         <option value={6}>6</option>
@@ -119,10 +120,11 @@ export default function Recipes({ products, validIngredients = [], onAddToShoppi
                         <option value="unlimited">Unlimited</option>
                     </select>
                 </div>
-                <label className={styles.checkboxLabel}>
-                    <span>Missing ingredients</span>
-                    <input type="checkbox" checked={allowMissing} onChange={(e) => { setAllowMissing(e.target.checked); setCurrentPage(1); }} />
-                </label>
+                    <label className={styles.checkboxLabel}>
+                        <span>Missing ingredients</span>
+                        <input type="checkbox" checked={allowMissing} onChange={(e) => { setAllowMissing(e.target.checked); setCurrentPage(1); }} />
+                    </label>
+                </div>
             </div>
 
             {loading && <p>Searching...</p>}

@@ -30,10 +30,11 @@
 
 .productCard {
     background: transparent;
-    padding: 0.4rem 0.6rem;
+    padding: 0.6rem 0.8rem;
     display: grid;
     grid-template-columns: 3fr 1fr 1.5fr auto;
     align-items: center;
+    gap: 10px;
     border-bottom: 1px solid #222;
     font-size: 0.85rem;
 }
@@ -67,10 +68,22 @@
     color: #cf6679;
     border: none;
     cursor: pointer;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     padding: 4px;
 }
 
 .btnDeleteSmall:hover {
     text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+    .productCard {
+        grid-template-columns: 1fr auto;
+        align-items: start;
+    }
+    .productName {
+        grid-column: 1 / -1;
+        font-size: 1rem;
+        margin-bottom: 4px;
+    }
 }

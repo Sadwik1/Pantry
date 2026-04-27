@@ -22,23 +22,23 @@
 
 .formGroup input {
     width: 100%;
-    padding: 0.35rem;
+    padding: 0.5rem;
     background-color: #2c2c2c;
     color: #fff;
     border: 1px solid #444;
     border-radius: 4px;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
 }
 
 .btnAddInline {
-    padding: 0.35rem 0.8rem;
+    padding: 0.5rem 0.8rem;
     background-color: #bb86fc;
     color: #121212;
     border: none;
     border-radius: 4px;
     font-weight: bold;
     cursor: pointer;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
 }
 
 .btnAddInline:disabled {
@@ -70,4 +70,16 @@
     font-weight: bold;
     font-size: 0.8rem;
     padding: 0 4px;
+}
+
+@media (max-width: 600px) {
+    .formInline {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    .btnAddInline {
+        width: 100%;
+        padding: 0.8rem;
+        margin-top: 5px;
+    }
 }
