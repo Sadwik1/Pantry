@@ -154,10 +154,10 @@ export default function Recipes({ products, validIngredients = [], onAddToShoppi
                                             <span>{ing.name} - {ing.measure}</span>
                                             {ing.isMissing && (
                                                 <button
-                                                    className="btn-add-to-shop" /* Ta klasa mo¿e nadal pochodziæ ze starego modu³u przycisku koszyka, np. ShoppingList, jeœli wspó³dzielisz ten przycisk globalnie lub w Recipe, ale warto go utrzymaæ wed³ug w³asnego uznania - ja zachowa³em string aby siê zgadza³o */
+                                                    className="btn-add-to-shop" 
                                                     onClick={(e) => {
                                                         e.stopPropagation();
-                                                        onAddToShopping(ing.name);
+                                                        onAddToShopping(ing.name, ing.measure);
                                                     }}
                                                     title="Add to shopping list"
                                                 >+</button>

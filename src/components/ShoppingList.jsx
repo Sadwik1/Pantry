@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './ShoppingList.module.css';
 
-export default function ShoppingList({ items, setItems, addToPantry }) {
+export default function ShoppingList({ items, setItems}) {
     const [newItemName, setNewItemName] = useState('');
     const [quantity, setQuantity] = useState('');
     

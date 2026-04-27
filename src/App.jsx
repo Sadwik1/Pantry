@@ -13,7 +13,7 @@ export default function App() {
             try {
                 return JSON.parse(savedProducts);
             } catch (e) {
-                console.error("B³¹d odczytu localStorage", e);
+                console.error("Bï¿½ï¿½d odczytu localStorage", e);
             }
         }
         return [];
@@ -53,8 +53,8 @@ export default function App() {
         setProducts(products.filter((p) => p.id !== id));
     };
 
-    const addToShoppingList = (name) => {
-        const newItem = { id: Date.now(), name, bought: false };
+    const addToShoppingList = (name, quantity) => {
+        const newItem = { id: Date.now(), name, quantity};
         setShoppingItems(prev => [newItem, ...prev]);
     };
 
